@@ -54,39 +54,12 @@
         PremiumOnly = false
     })
 
-    BloxFruitsTab:AddSlider({
-        Name = "Speed Multiplier",
-        Min = 1,
-        Max = 100,
-        Default = 1,
-        Color = Color3.fromRGB(255,255,255),
-        Increment = 1,
-        ValueName = "Multiplier",
-        Callback = function(Value)
-            if game.PlaceId == 2753915549 then
-                game.Players.LocalPlayer.Character:SetAttribute("SpeedMultiplier", Value)
-            else
-                print("You are not in Blox Fruits")
-            end
-        end    
-    })
-
-    BloxFruitsTab:AddSlider({
-        Name = "Dash Length",
-        Min = 1,
-        Max = 100,
-        Default = 1,
-        Color = Color3.fromRGB(255,255,255),
-        Increment = 1,
-        ValueName = "Length",
-        Callback = function(Value)
-            if game.PlaceId == 2753915549 then
-                game.Players.LocalPlayer.Character:SetAttribute("DashLength", Value)
-            else
-                print("You are not in Blox Fruits")
-            end
-        end    
-    })
+  BloxFruitsTab:AddButton({
+  	Name = "Script",
+	  Callback = function()
+      		loadstring(game:HttpGet('https://github.com/NGamerSYT/scripts/blob/main/BloxFruits.lua'))()
+   end    
+  })
 
     -- Tapping Legends X
 
@@ -96,17 +69,9 @@
         PremiumOnly = false
     })
 
-    TappingLegendsXTab:AddToggle({
-        Name = "Auto Tap",
-        Default = false,
-        Callback = function(Value)
-            while Value == true do
-                if game.PlaceId == 8750997647 then
-                    game:GetService('ReplicatedStorage').Remotes.Tap:FireServer()
-                else
-                    print("You are not in Tapping Legends X")
-                end
-                wait(.0000000000000000000000000000000000001)
-            end
-        end
-    })
+   TappingLegendsXTab:AddButton({
+  	Name = "Script",
+	  Callback = function()
+      		loadstring(game:HttpGet('https://github.com/NGamerSYT/scripts/blob/main/TappingLegendsX.lua'))()
+   end    
+  })
