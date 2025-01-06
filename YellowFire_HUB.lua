@@ -6,6 +6,7 @@ local h = game.Workspace:WaitForChild(p.Name):WaitForChild('Humanoid')
 -- Валюес --
 
 local GVPlay = false
+local MSPlay = false
 
 -- Основное --
 
@@ -66,7 +67,12 @@ GolosVremeni.Parent = FolderYF
 GolosVremeni.Name = "Голос Времени"
 GolosVremeni.SoundId = "rbxassetid://112284399361243"
 GolosVremeni.Volume = .1
-GolosVremeni.PlayOnRemove = true
+
+local Mineshield = Instance.new("Sound")
+Mineshield.Parent = FolderYF
+Mineshield.Name = "Mineshield"
+Mineshield.SoundId = "rbxassetid://122735642671172"
+Mineshield.Volume = .1
 
 -- Player Tab -- 
 
@@ -158,6 +164,18 @@ OtherFrame.CanvasSize = UDim2.new(0, 0, 1, 50)
 OtherFrame.Visible = false
 
 
+local GVP = Instance.new("TextLabel")
+GVP.Parent = OtherFrame
+GVP.Name = "Labels.YF"
+GVP.Size = UDim2.new(0, 432, 0, 50)
+GVP.TextColor3 = Color3.new(1, 1, 1)
+GVP.BackgroundColor3 = Color3.new(1, 1, 1)
+GVP.BackgroundTransparency = 1
+GVP.Text = "by YellowFire"
+GVP.TextColor3 = Color3.new(1,1,1)
+GVP.TextSize = 20
+
+
 local GVP = Instance.new("TextButton")
 local ctb = Instance.new("UICorner")
 local gtb = Instance.new("UIGradient")
@@ -166,39 +184,85 @@ ctb.CornerRadius = UDim.new(0, 10)
 gtb.Parent = GVP
 gtb.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0)) })
 GVP.Parent = OtherFrame
-GVP.Name = "Funtions.Test"
+GVP.Name = "Funtions.GV"
 GVP.Size = UDim2.new(0, 432, 0, 50)
 GVP.TextColor3 = Color3.new(1, 1, 1)
 GVP.BackgroundColor3 = Color3.new(1, 1, 1)
 GVP.BackgroundTransparency = .55
-GVP.Text = "Голос времени"
+GVP.Text = "Голос Времени"
+GVP.Position = UDim2.new(0, 0, 0, 60)
 GVP.TextColor3 = Color3.new(1,1,1)
 GVP.TextSize = 20
 GVP.MouseButton1Click:Connect(function()
 	if GVPlay == false then
 		gtb.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 255, 0)) })
 		GVPlay = true
-		
+
 		game.StarterGui:SetCore("SendNotification", {
 			Title = "Голос Времени";
 			Text = "Включён";
 			Duration = 10;
 		})
-		
+
 		GolosVremeni:Play()
-		
+
 	else
 		gtb.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0)) })
 		GVPlay = false
-		
+
 		game.StarterGui:SetCore("SendNotification", {
 			Title = "Голос Времени";
 			Text = "Остановлен";
 			Duration = 10;
 		})
-		
+
 		GolosVremeni:Stop()
-		
+
+	end
+end)
+
+local MSP = Instance.new("TextButton")
+local cms = Instance.new("UICorner")
+local gms = Instance.new("UIGradient")
+cms.Parent = MSP
+cms.CornerRadius = UDim.new(0, 10)
+gms.Parent = MSP
+gms.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0)) })
+MSP.Parent = OtherFrame
+MSP.Position = UDim2.new(0, 0, 0, 120)
+MSP.Name = "Funtions.MS"
+MSP.Size = UDim2.new(0, 432, 0, 50)
+MSP.TextColor3 = Color3.new(1, 1, 1)
+MSP.BackgroundColor3 = Color3.new(1, 1, 1)
+MSP.BackgroundTransparency = .55
+MSP.Text = "Mineshield"
+MSP.TextColor3 = Color3.new(1,1,1)
+MSP.TextSize = 20
+MSP.MouseButton1Click:Connect(function()
+	if MSPlay == false then
+		gms.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 255, 0)) })
+		MSPlay = true
+
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "MineShield";
+			Text = "Включён";
+			Duration = 10;
+		})
+
+		Mineshield:Play()
+
+	else
+		gms.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0)) })
+		MSPlay = false
+
+		game.StarterGui:SetCore("SendNotification", {
+			Title = "MineShield";
+			Text = "Остановлен";
+			Duration = 10;
+		})
+
+		Mineshield:Stop()
+
 	end
 end)
 
