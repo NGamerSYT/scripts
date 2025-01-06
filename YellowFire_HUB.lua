@@ -5,7 +5,7 @@ local h = game.Workspace:WaitForChild(p.Name):WaitForChild('Humanoid')
 
 -- Валюес --
 
-local TestV = false
+local GVPlay = false
 
 -- Основное --
 
@@ -50,6 +50,23 @@ close.TextColor3 = Color3.new(1,1,1)
 close.MouseButton1Click:Connect(function()
 	MainFrame.Visible = false
 end)
+
+-- Музыка --
+
+local FolderMusic = Instance.new("Folder")
+FolderMusic.Name = "Musics"
+FolderMusic.Parent = MainFrame
+
+local FolderYF = Instance.new("Folder")
+FolderYF.Name = "YelloFire"
+FolderYF.Parent = FolderMusic
+
+local GolosVremeni = Instance.new("Sound")
+GolosVremeni.Parent = FolderYF
+GolosVremeni.Name = "Голос Времени"
+GolosVremeni.SoundId = "rbxassetid://112284399361243"
+GolosVremeni.Volume = .1
+GolosVremeni.PlayOnRemove = true
 
 -- Player Tab -- 
 
@@ -113,26 +130,26 @@ NrmlJP.MouseButton1Click:Connect(function()
 	h.JumpHeight = 7.2
 end)
 
--- Other Tab --
+-- Music Tab --
 
-local OtherTab = Instance.new("TextButton")
+local MusicTab = Instance.new("TextButton")
 local cot = Instance.new("UICorner")
-cot.Parent = OtherTab
+cot.Parent = MusicTab
 cot.CornerRadius = UDim.new(0, 10)
-OtherTab.Name = "Tabs.Other"
-OtherTab.Parent = MainFrame
-OtherTab.BackgroundColor3 = Color3.new(1, 0.47, 0)
-OtherTab.Text = "Other"
-OtherTab.TextSize = 15
-OtherTab.BackgroundTransparency = .55
-OtherTab.TextColor3 = Color3.new(1, 1, 1)
-OtherTab.Position = UDim2.new(0, 5, 0, 80)
-OtherTab.Size = UDim2.new(0, 135, 0, 40)
+MusicTab.Name = "Tabs.Music"
+MusicTab.Parent = MainFrame
+MusicTab.BackgroundColor3 = Color3.new(1, 0.47, 0)
+MusicTab.Text = "Music"
+MusicTab.TextSize = 15
+MusicTab.BackgroundTransparency = .55
+MusicTab.TextColor3 = Color3.new(1, 1, 1)
+MusicTab.Position = UDim2.new(0, 5, 0, 80)
+MusicTab.Size = UDim2.new(0, 135, 0, 40)
 
 
 local OtherFrame = Instance.new("ScrollingFrame")
 OtherFrame.Parent = MainFrame
-OtherFrame.Name = "Frames.Other"
+OtherFrame.Name = "Frames.Music"
 OtherFrame.BackgroundTransparency = 1
 OtherFrame.Position = UDim2.new(0, 150, 0, 35)
 OtherFrame.Size = UDim2.new(0, 440, 0, 345)
@@ -141,42 +158,46 @@ OtherFrame.CanvasSize = UDim2.new(0, 0, 1, 50)
 OtherFrame.Visible = false
 
 
-local Test = Instance.new("TextButton")
+local GVP = Instance.new("TextButton")
 local ctb = Instance.new("UICorner")
 local gtb = Instance.new("UIGradient")
-ctb.Parent = Test
+ctb.Parent = GVP
 ctb.CornerRadius = UDim.new(0, 10)
-gtb.Parent = Test
+gtb.Parent = GVP
 gtb.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0)) })
-Test.Parent = OtherFrame
-Test.Name = "Funtions.Test"
-Test.Size = UDim2.new(0, 432, 0, 50)
-Test.TextColor3 = Color3.new(1, 1, 1)
-Test.BackgroundColor3 = Color3.new(1, 1, 1)
-Test.BackgroundTransparency = .55
-Test.Text = "Test"
-Test.TextColor3 = Color3.new(1,1,1)
-Test.TextSize = 20
-Test.MouseButton1Click:Connect(function()
-	if TestV == false then
+GVP.Parent = OtherFrame
+GVP.Name = "Funtions.Test"
+GVP.Size = UDim2.new(0, 432, 0, 50)
+GVP.TextColor3 = Color3.new(1, 1, 1)
+GVP.BackgroundColor3 = Color3.new(1, 1, 1)
+GVP.BackgroundTransparency = .55
+GVP.Text = "Голос времени"
+GVP.TextColor3 = Color3.new(1,1,1)
+GVP.TextSize = 20
+GVP.MouseButton1Click:Connect(function()
+	if GVPlay == false then
 		gtb.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 255, 0)) })
-		TestV = true
+		GVPlay = true
 		
 		game.StarterGui:SetCore("SendNotification", {
-			Title = "Test toggle";
-			Text = "ON";
+			Title = "Голос Времени";
+			Text = "Включён";
 			Duration = 10;
 		})
+		
+		GolosVremeni:Play()
 		
 	else
 		gtb.Color = ColorSequence.new({ ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 0)), ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 0, 0)) })
-		TestV = false
+		GVPlay = false
 		
 		game.StarterGui:SetCore("SendNotification", {
-			Title = "Test toggle";
-			Text = "OFF";
+			Title = "Голос Времени";
+			Text = "Остановлен";
 			Duration = 10;
 		})
+		
+		GolosVremeni:Stop()
 		
 	end
 end)
@@ -207,7 +228,7 @@ PlayerTab.MouseButton1Click:Connect(function()
 	OtherFrame.Visible = false
 end)
 
-OtherTab.MouseButton1Click:Connect(function()
+MusicTab.MouseButton1Click:Connect(function()
 	PlayerFrame.Visible = false
 	OtherFrame.Visible = true
 end)
